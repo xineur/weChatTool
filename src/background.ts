@@ -40,7 +40,6 @@ function createWindow(config?: Config) {
     win.loadURL('app://./index.html');
   }
 
-  win.webContents.openDevTools();
   win.on('closed', () => {
     win = null
   });

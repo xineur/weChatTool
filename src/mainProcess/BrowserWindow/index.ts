@@ -2,7 +2,7 @@ import { screen } from 'electron'
 
 export function BrowserOption() {
   const BScreen = screen.getPrimaryDisplay().workAreaSize;
-  const width = 1200;
+  const width = 850;
   const height = 700;
   const x = BScreen.width - width;
   const y = (BScreen.height - height) / 2;
