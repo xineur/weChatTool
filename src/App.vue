@@ -35,14 +35,9 @@ export default class App extends Vue {
   @Mutation("setBarParams")
   private setBarParams!: (data: BarParams) => void;
   public mounted(): void {
-    this.inject();
     this.$nextTick(() => {
       ipcRenderer.send(GLOBAL_STATUS.RENDER_SUCCESS, true);
     })
-  }
-  // 注入
-  private inject (): void {
-    ipcRenderer.send(INJECT_STATUS.INJECT);
   }
 }
 </script>

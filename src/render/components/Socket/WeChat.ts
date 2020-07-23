@@ -3,7 +3,7 @@
  */
 import store from '~/store';
 import { STATUS_CODE, USER_TYPE, WAKE_UP, SEND_FILE_TYPE } from '@/enum/weChat';
-import { GLOBAL_STATUS } from '@/enum/ipc';
+import { GLOBAL_STATUS, INJECT_STATUS } from '@/enum/ipc';
 import { UserInfoParams, SendFormat, FriendInfoParams, UserInfoParamsContent, FriendType, SendAllParams } from '@/interface/weChatParams';
 import { ipcRenderer } from 'electron';
 import api from '@/render/api/weChat';
@@ -49,7 +49,7 @@ export class WeChat {
   private ghData: TextMsg[] = [];
   private ghCode = "gh_10a9a9fa9be5";
   constructor () {
-    this.init()
+    this.init();
   }
 
   /**
@@ -74,8 +74,10 @@ export class WeChat {
    * 初始化
    */
   private init () {
+    ipcRenderer.send(GLOBAL_STATUS.SEND_CONFIG);
     ipcRenderer.on(GLOBAL_STATUS.GET_CONFIG, (event: Electron.IpcMessageEvent, data: Config) => {
       this.config = data;
+      this.open();
     })
   }
 
@@ -285,7 +287,6 @@ export class WeChat {
     this.socket.onopen = () => {
       console.log("open");
       // 获取配置文件
-      ipcRenderer.send(GLOBAL_STATUS.SEND_CONFIG);
       store.commit("setStatus", 0);
       this.getUserInfo();
       this.getFriend();
@@ -334,13 +335,18 @@ export class WeChat {
     this.socket.onclose = () => {
       store.commit("setStatus", 1);
       console.log("close");
-      clearTimeout(this.timeout);
-      if (!this.timeFlag) return;
+      ipcRenderer.send(INJECT_STATUS.INJECT);
+      // clearTimeout(this.timeout);
+      // if (!this.timeFlag) return;
       // 非正常关闭,重新打开webSocket
-      this.timeout = setTimeout(() => {
-        this.open();
-      }, 5000)
+      // this.timeout = setTimeout(() => {
+      //   this.open();
+      // }, 5000)
     };
+    // 错误
+    this.socket.onerror = (err: any) => {
+      console.log(err)
+    }
   }
 
   /**

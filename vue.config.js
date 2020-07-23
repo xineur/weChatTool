@@ -22,6 +22,9 @@ module.exports = {
       nodeIntegration: true,
       builderOptions: {
         productName: "微信助手",
+        win: {
+          icon: "./static/icon/icon.ico"
+        },
         publish: [
           {
             "provider": "generic",

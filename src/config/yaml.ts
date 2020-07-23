@@ -13,7 +13,8 @@ export default class Yaml {
   // 读取配置文件
   public readConfig () {
     return read(this.filePath).then((res: Config) => {
-      res = Object.assign({}, config, res);
+      res = Object.assign({}, config, res || {});
+      console.log(res)
       writeSync(this.filePath, res);
       return Promise.resolve(res)
     }).catch((err: Error) => {

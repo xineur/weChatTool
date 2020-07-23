@@ -21,7 +21,6 @@ let configs: Config;
 // (protocol as any).registerSchemesAsPrivileged([{scheme: 'app', privileges: {secure: true, standard: true}}]);
 global.__static = join(app.getPath("exe"), isDevelopment ? "../../../../static": "../resources/static");
 
-
 function createWindow(config?: Config) {
   if (config) {
     configs = config
@@ -83,7 +82,6 @@ app.on('ready', async () => {
     // } catch (e) {
     //   console.error('Vue Devtools failed to install:', e.toString())
     // }
-
   }
   const yaml = new Yaml();
   yaml.readConfig().then((config: Config) => {

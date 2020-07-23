@@ -113,7 +113,6 @@ export default class Home extends Vue {
   }
   // 向你的好友发送图片
   public sendPicMsg (): void {
-    // E:\\github\\wechat-robot-electron\\public\\avatar.jpg
     this.WeChat.sendPicMsg(this.friendData.id, this.friendData.content)
   }
   // 向你的好友发送文件

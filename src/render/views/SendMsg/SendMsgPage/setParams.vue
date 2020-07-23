@@ -50,8 +50,6 @@
       >
         发送消息
       </v-btn>
-
-      {{userList.length}}
       <v-btn
           color="deep-purple lighten-2"
           v-if="userList.length > 1"

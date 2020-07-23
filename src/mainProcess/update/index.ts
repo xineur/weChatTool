@@ -32,7 +32,7 @@ class Update {
     this.unallowed();
     this.listen();
     this.download();
-    this.load();
+    if (process.env.NODE_ENV === "production") this.load();
   }
   public load () { // 触发器
     autoUpdater.checkForUpdates()

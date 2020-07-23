@@ -10,19 +10,19 @@ export default {
     {
       text: "文件",
       type: "file",
-      content: "C:\\Users\\86176\\Documents\\wechat-robot-electron\\config.yaml",
+      content: "",
       exact: false
     },
     {
       text: "图片",
       type: "img",
-      content: "C:\\Users\\86176\\Documents\\wechat-robot-electron\\1.jpg",
+      content: "",
       exact: false
     },
     {
       text: "图片文件",
       type: "file",
-      content: "C:\\Users\\86176\\Documents\\wechat-robot-electron\\1.jpg",
+      content: "",
       exact: true
     },
     {
