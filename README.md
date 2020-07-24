@@ -1,8 +1,7 @@
 ## 前言
 
 本项目主要是基于微信hook制作的windows微信助手工具,基于[wechat-bot](https://github.com/cixingguangming55555/wechat-bot)
-
-<b>微信助手不属于腾讯认可的助手工具,在使用的过程中有导致封号的危险,不推荐使用大号使用!!!!如因使用导致微信封号概不负责</b>
+最初是因为看到[微信每日说](https://github.com/gengchen528/wechatBot),想使用,发现web接口不对2017年后的微信开放,各方找资料,最终确定了本方案
 
 [使用文档](https://github.com/suruixin/weChatTool/tree/master/doc/using.md)
 
