@@ -29,6 +29,117 @@ ffi-napi: 2.4.5
 
 [注入器](https://github.com/suruixin/WeChatInject)
 
+## 目录
+
+```
+./
+├ public                   // 公共文件存放地址
+├ src
+│  ├ config                // 配置文件存放地址
+│  │  ├ config.ts          // 系统中需要用到的不对外公开的配置信息
+│  │  ├ index.ts           // 系统中需要用到的初始化配置信息
+│  │  └ yaml.ts            // 将初始化配置存放到用户电脑上,并生成yarm文件
+│  ├ enum                  // 数据类型文件存放地址
+│  │  ├ ipc.ts             // 主进程和渲染进程通信
+│  │  ├ mainEnum.ts        // 主进程中用到的数据类型
+│  │  └ weChat.ts          // 调用微信hook进行数据传输的数据类型
+│  ├ interface             // 接口存放地址
+│  │  ├ api.ts             // 数据请求接口
+│  │  ├ config.ts          // 初始化配置信息接口
+│  │  ├ mainInterface.ts   // 主进程中用到的接口
+│  │  ├ views.ts           // 渲染进程中用到的接口
+│  │  ├ vuexInterface.ts   // vuex用到的接口
+│  │  └ weChatParams.ts    // 微信hook用到的接口
+│  ├ mainProcess            // 主进程存放地址
+│  │  ├ BrowserWindow      // 主进程配置文件
+│  │  │  └ index.ts
+│  │  ├ Inject             // 注入文件
+│  │  │  ├ Inject.ts      // 注入文件封装
+│  │  │  └ manage.ts      // 注入文件使用
+│  │  ├ ipc                // 主进程与渲染进程通讯
+│  │  │  └ index.ts
+│  │  ├ tray               // 托盘
+│  │  │  └ index.ts
+│  │  ├ update             // 升级
+│  │  │  └ index.ts
+│  │  └ index.ts           // 主进程输出文件
+│  ├ render                 // 渲染进程存放地址
+│  │  ├ api                // 数据请求
+│  │  │  ├ index.ts       // 数据请求出口文件
+│  │  │  ├ turing.ts      // 图灵机器人数据请求
+│  │  │  └ weChat.ts      // 微信hook数据请求
+│  │  ├ assets             // 渲染进程静态文件
+│  │  │  ├ icon           // icon
+│  │  │  ├ images         // 图片
+│  │  │  └ sass           // 全局sass文件
+│  │  ├ components         // 组件
+│  │  │  ├ Common
+│  │  │  │  └ Snackbar.vue // 错误提醒
+│  │  │  ├ Main             // 通用主页面
+│  │  │  │  ├ components
+│  │  │  │  │  ├ content.vue        // 内容区域
+│  │  │  │  │  ├ footer.vue         // 底部
+│  │  │  │  │  ├ navigation.vue     // 左侧边栏
+│  │  │  │  │  └ title.vue          // 头部
+│  │  │  │  └ index.vue  // 通用主页面入口文件
+│  │  │  └ Socket
+│  │  │     └ Socket
+│  │  │         └ WeChat.ts // 微信hook websocket监听
+│  │  ├ mixins             // 混入
+│  │  │  └ index.ts
+│  │  ├ plugins            // 插件
+│  │  │  ├ tool
+│  │  │  │  ├ api.ts     // api文件输出
+│  │  │  │  └ index.ts   // 输出本目录下所有文件
+│  │  │  ├ common.ts      // 通用方法
+│  │  │  ├ main.ts        // vue全局注入
+│  │  │  └ vuetify.ts     // vuetify配置
+│  │  ├ router             // 路由
+│  │  │  ├ index.ts
+│  │  │  └ routes.ts
+│  │  ├ store              // vuex
+│  │  │  ├ modules
+│  │  │  │  ├ index.ts
+│  │  │  │  ├ main.ts
+│  │  │  │  └ userList.ts
+│  │  │  ├ actions.ts
+│  │  │  ├ getters.ts
+│  │  │  ├ index.ts
+│  │  │  ├ mutations.ts
+│  │  │  └ mutations.ts
+│  │  ├ utils              // 工具封装
+│  │  │  ├ axios.ts       // axios封装
+│  │  │  ├ ipc.ts         // 通用主进程通讯分装
+│  │  │  └ require.ts     // get post等请求封装
+│  │  └ views              // 页面
+│  │      ├ About          // 关于页面
+│  │      │ └ AboutPage.vue          // 关于页面
+│  │      ├ Home           // 首页(未想好做什么样的)
+│  │      ├ SendMsg        // 发送消息页面
+│  │      │ ├ SendMsgPage            // 发送消息页面相关信息
+│  │      │ │ ├ userList            // 好友列表相关
+│  │      │ │ │ ├ listItem.vue     // 单好友页面
+│  │      │ │ │ └ listWrapper.vue  // 好友组页面
+│  │      │ │ ├ setParams.vue       // 右侧发送消息
+│  │      │ │ └ userList.vue        // 好友列表
+│  │      │ └ SendMsgPage.vue        // 发送消息页面入口
+│  │      └ Tool           // 配置页面(未想好做什么样的)
+│  ├ type                   // 类型别名文件存放地址
+│  ├ App.vue
+│  ├ background.ts          // 主进程入口
+│  ├ main.ts
+│  ├ registerServiceWorker.ts
+│  ├ shims-node.d.ts
+│  ├ shims-tsx.d.ts
+│  └ shims-vue.d.ts
+├ static
+│  ├ dll // 动态链接库(hook和注入)存放地址
+│  └ icon // 打包icon存放地址
+├ package.json
+├ tsconfig.json
+└ vue.config.js
+```
+
 ## 回复方式
 
 公众号(使用的微软小冰)
@@ -128,7 +239,9 @@ userOpen: 2
 
 <b>本项目初衷为解决生活中需要被动回复消息/发送文件,严禁用于打广告/推广等行为</b>
 
-<b>微信助手不属于腾讯认可的助手工具,在使用的过程中有导致封号的危险,不推荐使用大号使用!!!!</b>
+<b>微信助手不属于腾讯认可的助手工具,所以用于营销,发广告等行为会导致封号,这也是我说严禁用于打广告/推广的原因,希望大家可以在腾讯允许的范围内进行使用</b>
+
+如二次开发给女朋友查询干湿垃圾,每日天气播报等等,同时欢迎各位it朋友加好友一起研究前端 c++知识(本人前端一枚,会一些简单的c++)
 
 ## 成品下载地址
 
