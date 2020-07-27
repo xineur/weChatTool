@@ -70,6 +70,7 @@ custom:
 # type: 发送类型 分为 image(图片), file(不大于100M的文件), text(自定义文本)
 # content: 发送的快捷语
 # exact: 是否精确匹配快捷语
+# chart: 群消息是否使用快捷语
 userOpen: 2
 # userOpen: 聊天是否使用机器人(仅限好友) 0 不使用 1 使用快捷语唤起 2 静默唤起
 ```
@@ -137,3 +138,14 @@ custom:
     content: 'c:/1.png'
     exact: false
 ```
+
+当群消息不需要被回复时,将`chart`设置为`false`,则仅回复好友消息,如
+```
+custom:
+  - text: '你好,朋友'
+    type: "image"
+    content: 'c:/1.png'
+    exact: false
+    chart: false
+```
+在这种情况下,当接收到`你好,朋友`时,如果对方是好友,则进行回复,如果是群则不进行回复

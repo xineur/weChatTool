@@ -11,25 +11,29 @@ export default {
       text: "文件",
       type: "file",
       content: "",
-      exact: false
+      exact: false,
+      chart: false
     },
     {
       text: "图片",
       type: "img",
       content: "",
-      exact: false
+      exact: false,
+      chart: false
     },
     {
       text: "图片文件",
       type: "file",
       content: "",
-      exact: true
+      exact: true,
+      chart: false
     },
     {
       text: "你是",
       type: "text",
       content: "我",
-      exact: true
+      exact: true,
+      chart: true
     }
   ],
   userOpen: 2, // 好友聊天是否使用机器人(仅限好友) 0 不使用 1 使用快捷语唤起 2 静默唤起

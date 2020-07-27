@@ -13,6 +13,7 @@ export interface Config {
     type: msg_type;
     content: string;
     exact: boolean;
+    chart: boolean
   }[];
   userOpen: number;
 }

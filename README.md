@@ -231,6 +231,7 @@ custom:
 # type: 发送类型 分为 image(图片), file(不大于100M的文件), text(自定义文本)
 # content: 发送的快捷语
 # exact: 是否精确匹配快捷语
+# chart: 群消息是否使用快捷语
 userOpen: 2
 # userOpen: 聊天是否使用机器人(仅限好友) 0 不使用 1 使用快捷语唤起 2 静默唤起
 ```

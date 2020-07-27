@@ -423,11 +423,11 @@ export class WeChat {
   /**
    * 自定义发送文件/图片/文字处理
    */
-  private sendFileCallBack(wxid: string, content: string): number {
+  private sendFileCallBack(wxid: string, content: string, type: string): number {
     // 检测接受到的消息是否需要发送文件
     let fileIndex = -1;
-    fileIndex = this.config.custom.findIndex(m => m.exact && m.text === content);
-    fileIndex === -1 && (fileIndex = this.config.custom.findIndex(m => new RegExp(m.text).test(content)));
+    fileIndex = this.config.custom.findIndex(m => ((m.chart && type === "chart") || type === "user") && m.exact && m.text === content);
+    fileIndex === -1 && (fileIndex = this.config.custom.findIndex(m => ((m.chart && type === "chart") || type === "user") && (new RegExp(m.text).test(content))));
     if (fileIndex !== -1) {
       this.sendAll({
         content: this.config.custom[fileIndex].content,
@@ -444,7 +444,7 @@ export class WeChat {
    */
   private async chatRoomText (data: TextMsg) {
     // 检测接受到的消息是否需要发送文件
-    if (this.sendFileCallBack(data.receiver, data.content)) return;
+    if (this.sendFileCallBack(data.receiver, data.content, "chart")) return;
     // 开启机器人
     if (this.config.open.find(m => m === data.content)) {
       this.openState[data.receiver] = WAKE_UP.ON;
@@ -518,7 +518,7 @@ export class WeChat {
         break;
     }
     // 检测接受到的消息是否需要发送文件
-    if (this.sendFileCallBack(data.sender, data.content)) return;
+    if (this.sendFileCallBack(data.sender, data.content, "user")) return;
     // 检测是否开启机器人
     if (this.openState[data.sender] === WAKE_UP.ON) {
       Object.assign(data, {
