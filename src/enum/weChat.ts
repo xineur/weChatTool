@@ -3,7 +3,7 @@ export enum STATUS_CODE {
   RECV_TXT_MSG = 1, // 接受到好友消息文字
   RECV_PIC_MSG = 3, // 接受到好友消息图片
   USER_LIST = 5000, // 发送获取好友列表
-  GET_USER_LIST_SUCCESS = 5001, // 获取到好友列表
+  GET_USER_LIST_SUCCESS = 5000, // 获取到好友列表
   GET_USER_LIST_FAIL = 5002,
   TXT_MSG = 555, // 发送文本消息
   PIC_MSG = 500, // 发送图片消息
@@ -13,7 +13,9 @@ export enum STATUS_CODE {
   PERSONAL_INFO = 6500, // 获取微信个人信息及回调
   DEBUG_SWITCH = 6000, // debug模式
   PERSONAL_DETAIL = 6550, // 获取好友详细信息
-  DESTROY_ALL = 9999
+  DESTROY_ALL = 9999,
+  NEW_FRIEND_REQUEST = 37, // 微信好友请求消息
+  AGREE_TO_FRIEND_REQUEST = 10000, // 同意微信好友请求消息
 }
 
 // 唤起机器人状态

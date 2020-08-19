@@ -252,6 +252,7 @@ export class WeChat {
       roomid,
       nickname: AT
     };
+    console.log(data);
     if (!/https?:/.test(content)) {
       this.send(data)
     }
@@ -315,6 +316,10 @@ export class WeChat {
           break;
         case STATUS_CODE.HEART_BEAT:
           console.log("心跳检测");
+          break;
+        case STATUS_CODE.NEW_FRIEND_REQUEST: // 接受到好友请求
+        case STATUS_CODE.AGREE_TO_FRIEND_REQUEST: // 接受到同意好友消息
+          console.log(data);
           break;
         case STATUS_CODE.RECV_TXT_MSG: // 接受到好友文字消息
           store.commit("setWeChatParams", data);
@@ -463,6 +468,8 @@ export class WeChat {
       });
       return
     }
+    // 处理开头为机器人名称的消息
+    const index = this.config.name.findIndex(m => m === data.content.substring(0, m.length));
     // 判断是否为@消息
     if (/^@.*?\s.*$/.test(data.content)) {
       const name = data.content.replace(/^@(.*?)\s(.*)$/, '$1');
@@ -479,11 +486,8 @@ export class WeChat {
           }
         })
       }
-    }
-    // 处理开头为机器人名称的消息
-    const index = this.config.name.findIndex(m => m === data.content.substring(0, m.length));
-    // 未呼叫机器人
-    if (index === -1) {
+    } else if (index === -1) {
+      // 未呼叫机器人
       return
     } else { // 呼叫机器人
       data.content = data.content.substring(this.config.name[index].length)
